@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://art/rocket.png" type="Texture" id=2]
+[ext_resource path="res://weaponsAndProjectiles/rocket.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.5, 5.5 )
+
+[node name="rocket" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+shootOnReady = false
+removeOnScreenExit = false
+
+[node name="CollisionShape2D" parent="projectile" index="0"]
+position = Vector2( 0.5, -0.5 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Sprite" parent="." index="1"]
+position = Vector2( 0.999998, 2 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 2 )
+
+[node name="VisibilityEnabler2D" parent="." index="2"]
+pause_animations = false
+freeze_bodies = false
+pause_particles = false
+pause_animated_sprites = false
+
+[node name="CollisionTimer" type="Timer" parent="." index="3"]
+one_shot = true
+
+[node name="Timer" type="Timer" parent="." index="4"]
+wait_time = 5.0
+one_shot = true
+
+[node name="VisibilityNotifier2D" parent="." index="5"]
+position = Vector2( 0.500001, -0.5 )
+scale = Vector2( 0.75, 0.55 )
+
+[connection signal="timeout" from="CollisionTimer" to="." method="_on_CollisionTimer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

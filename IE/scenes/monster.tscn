@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://art/goblin_animation.png" type="Texture" id=1]
+[ext_resource path="res://scripts/monster.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ui/healthbar.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 3 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 6.21058
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 99.0051
+
+[sub_resource type="Animation" id=6]
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.13, 0.25, 0.38 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "damageAnimation"
+}, {
+"args": [  ],
+"method": "damageAnimation"
+}, {
+"args": [  ],
+"method": "damageAnimation"
+}, {
+"args": [  ],
+"method": "damageAnimation"
+} ]
+}
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+disabled = true
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+
+[node name="hitboxCollider" type="CollisionShape2D" parent="hitbox"]
+scale = Vector2( 1.44914, 1.44914 )
+shape = SubResource( 2 )
+
+[node name="attack_range" type="Area2D" parent="."]
+input_pickable = false
+
+[node name="rangeCollider" type="CollisionShape2D" parent="attack_range"]
+shape = SubResource( 3 )
+
+[node name="DamageTimer" type="Timer" parent="."]
+
+[node name="AttackTwo" type="Timer" parent="."]
+
+[node name="ColliderOn" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="AttackOne" type="Timer" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 50.0
+neighbor_dist = 50.0
+
+[node name="melee_damage" type="Area2D" parent="."]
+input_pickable = false
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+
+[node name="damageAnimation" type="AnimationPlayer" parent="."]
+anims/damage = SubResource( 6 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 0, 2.84217e-14 )
+scale = Vector2( 0.8, 0.8 )
+
+[node name="healthbar" parent="." instance=ExtResource( 3 )]
+margin_bottom = -8.0
+rect_min_size = Vector2( 0, 4 )
+rect_pivot_offset = Vector2( 8, 2 )
+mouse_filter = 2
+
+[connection signal="input_event" from="hitbox" to="." method="_on_hitbox_input_event"]
+[connection signal="area_entered" from="attack_range" to="." method="_on_attack_range_area_entered"]
+[connection signal="area_exited" from="attack_range" to="." method="_on_attack_range_area_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="AttackTwo" to="." method="_on_AttackTwo_timeout"]
+[connection signal="timeout" from="ColliderOn" to="." method="_on_ColliderOn_timeout"]
+[connection signal="timeout" from="AttackOne" to="." method="_on_AttackOne_timeout"]
+[connection signal="area_entered" from="melee_damage" to="." method="_on_melee_damage_area_entered"]
+[connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]

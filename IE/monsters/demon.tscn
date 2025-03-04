@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/monster.tscn" type="PackedScene" id=1]
+[ext_resource path="res://art/flyingdude.png" type="Texture" id=2]
+[ext_resource path="res://scripts/demon.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "attack"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("../../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.8, 0.85 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "walk"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "walk"
+
+[sub_resource type="AnimationNodeStateMachine" id=5]
+states/walk/node = SubResource( 4 )
+states/walk/position = Vector2( 360.5, 85.5 )
+start_node = "walk"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
+[node name="KinematicBody2D" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+hframes = 1
+vframes = 3
+
+[node name="rangeCollider" parent="attack_range" index="0"]
+scale = Vector2( 1.38406, 1.37869 )
+
+[node name="VisibilityEnabler2D" parent="." index="12"]
+position = Vector2( -0.5, 2.84217e-14 )
+scale = Vector2( 1.15, 0.8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="14"]
+root_node = NodePath("../attack_range/rangeCollider")
+autoplay = "walk"
+anims/RESET = SubResource( 2 )
+anims/attack = SubResource( 3 )
+anims/walk = SubResource( 1 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="15"]
+tree_root = SubResource( 5 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 6 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

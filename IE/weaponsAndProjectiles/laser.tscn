@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/laser.gd" type="Script" id=2]
+[ext_resource path="res://art/laser_bullet.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 1.0
+height = 2.0
+
+[node name="KinematicBody2D" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="projectile" index="0"]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+
+[node name="VisibilityNotifier2D" parent="." index="2"]
+position = Vector2( 4.76837e-07, -5.96046e-08 )
+scale = Vector2( 0.2, 0.1 )

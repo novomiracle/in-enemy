@@ -5,6 +5,7 @@ var rocketLoad = load("res://weaponsAndProjectiles/rocket.tscn");
 var rocket
 var parent
 signal rip
+
 func stats():
 	parent = get_parent().get_parent()
 	rocket = rocketLoad.instance()

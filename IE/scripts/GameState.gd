@@ -14,17 +14,18 @@ var playerSpeedBoost:float = 1.2
 var playerAttackSpeedBoost:float = 1.5
 var friendlyFire:float = 0.5
 var cameraMan;
-const monsterVals:Array = [
-	{"name":"goblin","res":1},
-	{"name":"chomps","res":1},
-	{"name":"bullhead","res":2},
-	{"name":"skeleton","res":1},
-	{"name":"slime","res":1},
-	{"name":"eyeball","res":1},
-	{"name":"demon","res":2},
-	{"name":"rockethead","res":2}
+onready var monsterVals:Array = [
+	{"name":"goblin","res":1,"load":load("res://monsters/goblin.tscn")},
+	{"name":"chomps","res":1,"load":load("res://monsters/chomps.tscn")},
+	{"name":"bullhead","res":2,"load":load("res://monsters/bullhead.tscn")},
+	{"name":"skeleton","res":1,"load":load("res://monsters/skeleton.tscn")},
+	{"name":"slime","res":1,"load":load("res://monsters/slime.tscn")},
+	{"name":"eyeball","res":1,"load":load("res://monsters/eyeball.tscn")},
+	{"name":"demon","res":2,"load":load("res://monsters/demon.tscn")},
+	{"name":"rockethead","res":2,"load":load("res://monsters/rockethead.tscn")}
 	]
 onready var scene_switcher = get_tree().current_scene
+onready var soulScene = load("res://scenes/soul.tscn")
 onready var outlineShader = load("res://shaders/player.tres")
 var cooldown;
 func _ready():

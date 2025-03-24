@@ -28,17 +28,13 @@ freeze_bodies = false
 pause_particles = false
 pause_animated_sprites = false
 
-[node name="CollisionTimer" type="Timer" parent="." index="3"]
-one_shot = true
-
-[node name="Timer" type="Timer" parent="." index="4"]
+[node name="Timer" type="Timer" parent="." index="3"]
 wait_time = 5.0
 one_shot = true
 
-[node name="VisibilityNotifier2D" parent="." index="5"]
+[node name="VisibilityNotifier2D" parent="." index="4"]
 position = Vector2( 0.500001, -0.5 )
 scale = Vector2( 0.75, 0.55 )
 
-[connection signal="timeout" from="CollisionTimer" to="." method="_on_CollisionTimer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

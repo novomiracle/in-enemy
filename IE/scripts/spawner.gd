@@ -18,12 +18,11 @@ func monster():
 		var mon = GameState.monsterVals[GameState.random.randi_range(0,monsterCount)];
 		while(mon["res"] > resource):
 			mon = GameState.monsterVals[GameState.random.randi_range(0,monsterCount)]
-		spawn(mon["name"])
+		spawn(mon["load"])
 		resource -= mon["res"]
 	resource = GameState.monsterResource
-func spawn(monster:String):
-	var scene = load("res://monsters/"+monster+".tscn")
-	var instance = scene.instance()
+func spawn(monster):
+	var instance = monster.instance()
 	instance.position = position + Vector2(GameState.random.randi_range(-10,10),GameState.random.randi_range(-10,10))
 	monsterContainer.add_child(instance)
 # Called every frame. 'delta' is the elapsed time since the previous frame.

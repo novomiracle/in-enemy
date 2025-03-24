@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scenes/spawner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/area_damage.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/waveGenerator.tscn" type="PackedScene" id=2]
 [ext_resource path="res://monsters/goblin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/TileMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/ui/game_ui.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/cameraman.tscn" type="PackedScene" id=6]
-[ext_resource path="res://monsters/rockethead.tscn" type="PackedScene" id=7]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( -428, 133.001, 382.001, 314.999, -800.999, 309.002, -553, 132.001, -808.001, -354.998, -552, 24.0014, 367.999, -349.001, -506, 24.0013, -428, 88.0011, -506, 88.0013 )
@@ -40,12 +39,9 @@ rotation = -3.14159
 
 [node name="monsterContainer" type="YSort" parent="."]
 
-[node name="KinematicBody2D" parent="monsterContainer" instance=ExtResource( 7 )]
-position = Vector2( 79, 110 )
-
 [node name="goblin" parent="monsterContainer" instance=ExtResource( 3 )]
-position = Vector2( -18, 20 )
+position = Vector2( 0, 20 )
 player = true
 
 [node name="Node2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 104, -200 )
+position = Vector2( 104, -164 )

@@ -3,7 +3,7 @@ extends KinematicBody2D
 signal tookDamage
 signal died
 signal attack1
-var movingSpeed
+var movingSpeed:float
 var damageAnimation:bool = false;
 var flying:bool = false
 export var ai:bool = true;
@@ -25,7 +25,6 @@ var knocked:float = 0;
 var knockback:float = 220;
 var knockbackResistance:float = 0;
 var knockbackDirection:Vector2 = Vector2.ZERO
-onready var soulScene = load("res://scenes/soul.tscn")
 var direction = Vector2.ZERO
 #onready var shader = $Sprite.material.duplicate();
 # Called when the node enters the scene tree for the first time.
@@ -66,14 +65,12 @@ func switchesScript():
 		toAttack = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func switched():
-	print(is_connected("attack1",GameState.cooldown,"reset"))
 	disconnect("died",get_tree().current_scene,"switch_to_lose_screen")
 	disconnect("attack1",GameState.cooldown,"reset")
 	disconnect("tookDamage",GameState.cameraMan,"shake")
 	$AttackOne.wait_time = attackOneCooldown
 	$AttackTwo.wait_time = attackTwoCooldown
 	movingSpeed = speed
-	print("afssfsd ", player)
 func _physics_process(delta):
 	if player:
 		playerPlus()
@@ -107,23 +104,19 @@ func playerScript():
 		$healthbar.rect_rotation = 0
 		scale.y = 1
 		rotation_degrees = 0
-	if Input.is_action_pressed("up"):
-		direction.y -= 1
-	elif Input.is_action_pressed("down"):
-		direction.y += 1 
-	if Input.is_action_pressed("left"):
-		direction.x -= 1
-	elif Input.is_action_pressed("right"):
-		direction.x += 1
+	#movement
+	direction.y = Input.get_axis("up","down")
+	direction.x = Input.get_axis("left","right")
+	
 	if Input.is_action_just_pressed("attack1") && attackOneBool:
 		emit_signal("attack1")
 		attack1()
 		attackOneBool = false
 		$AttackOne.start()
-	if Input.is_action_just_pressed("attack2") && attackTwoBool:
-		attack2()
-		attackTwoBool = false
-		$AttackTwo.start()
+#	if Input.is_action_just_pressed("attack2") && attackTwoBool:
+#		attack2()
+#		attackTwoBool = false
+#		$AttackTwo.start()
 func playerPlus():
 	pass
 func attack1():
@@ -217,12 +210,12 @@ func die():
 func onDeath():
 	pass
 func dropSoul():
-	var inst = soulScene.instance()
+	var inst = GameState.soulScene.instance()
 	inst.position = position + Vector2(GameState.random.randi_range(-5,5),GameState.random.randi_range(-5,5))
 	inst.position = inst.position.round()
 	get_parent().add_child(inst)
 func _on_melee_damage_area_entered(area):
-	if area.name == "hitbox" && area.get_parent() != self:
+	if area.is_in_group("hitbox") && area.get_parent() != self:
 		if area.get_parent().player || player:
 			area.get_parent().damage(damage,position,knockback)
 		else:

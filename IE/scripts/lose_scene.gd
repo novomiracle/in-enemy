@@ -9,6 +9,7 @@ signal main_menu
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$waves.text = "waves:"+str(GameState.wave)
 	connect("retry",GameState.scene_switcher,"retry")
 	connect("main_menu",GameState.scene_switcher,"main_menu")
 

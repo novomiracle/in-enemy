@@ -22,7 +22,8 @@ onready var monsterVals:Array = [
 	{"name":"slime","res":1,"load":load("res://monsters/slime.tscn")},
 	{"name":"eyeball","res":1,"load":load("res://monsters/eyeball.tscn")},
 	{"name":"demon","res":2,"load":load("res://monsters/demon.tscn")},
-	{"name":"rockethead","res":2,"load":load("res://monsters/rockethead.tscn")}
+	{"name":"rockethead","res":2,"load":load("res://monsters/rockethead.tscn")},
+	{"name":"dark_wizard","res":2,"load":load("res://monsters/dark_wizard.tscn")}
 	]
 onready var scene_switcher = get_tree().current_scene
 onready var soulScene = load("res://scenes/soul.tscn")

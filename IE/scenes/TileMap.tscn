@@ -29,7 +29,7 @@ points = PoolVector2Array( 0, 0, 4, 0, 4, 4, 0, 4 )
 0/shape_one_way = false
 0/shape_one_way_margin = 0.0
 0/shapes = [  ]
-0/z_index = 0
+0/z_index = -1
 1/name = "basicMapTileset.png 1"
 1/texture = ExtResource( 1 )
 1/tex_offset = Vector2( 0, 0 )
@@ -50,7 +50,7 @@ points = PoolVector2Array( 0, 0, 4, 0, 4, 4, 0, 4 )
 "shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
-1/z_index = 0
+1/z_index = -1
 2/name = "basicMapTileset.png 2"
 2/texture = ExtResource( 1 )
 2/tex_offset = Vector2( 0, 0 )
@@ -71,7 +71,7 @@ points = PoolVector2Array( 0, 0, 4, 0, 4, 4, 0, 4 )
 "shape": SubResource( 3 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
-2/z_index = 0
+2/z_index = -1
 3/name = "basicMapTileset.png 3"
 3/texture = ExtResource( 1 )
 3/tex_offset = Vector2( 0, 0 )
@@ -113,7 +113,7 @@ points = PoolVector2Array( 0, 0, 4, 0, 4, 4, 0, 4 )
 "shape": SubResource( 5 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
-4/z_index = 0
+4/z_index = -1
 
 [sub_resource type="NavigationPolygon" id=6]
 vertices = PoolVector2Array( 952, 232, 903, 487, 792, 486, 680, 456, 680, 422, 761, 310, 841, 230, 793, 517, 408, 486, 571, 456, 1048, 131, 1052, 827, 936, 601, 904, 520, 936, 711, 133, 827, 904, 709, 951, 200, 132, 135, 841, 200, 760, 201, 728, 309, 776, 661, 905, 600, 775, 696, 665, 661, 377, 585, 378, 485, 729, 201, 665, 697, 506, 694, 394, 696, 376, 698, 571, 422, 427, 279, 426, 248, 407, 377, 314, 279, 378, 377, 314, 248, 344, 585, 504, 662, 394, 661, 344, 695 )
@@ -122,6 +122,7 @@ outlines = [ PoolVector2Array( 132, 135, 133, 827, 1052, 827, 1048, 131 ), PoolV
 
 [node name="TileMap" type="TileMap"]
 position = Vector2( 0, -2 )
+z_as_relative = false
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 bake_navigation = true

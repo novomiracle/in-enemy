@@ -7,7 +7,7 @@ extends Node2D
 onready var monsterContainer = get_parent().get_node("monsterContainer");
 var resource:int
 export var monsterName:String = "";
-const monsterCount = 7
+const monsterCount = 8
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameState.connect("newWave",self,"monster")

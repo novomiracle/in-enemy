@@ -17,7 +17,7 @@ func shoot():
 
 func _ready():
 	visible = false
-	speed = 40
+	speed = 45
 	damage = 30
 
 func die():

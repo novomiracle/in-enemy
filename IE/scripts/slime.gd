@@ -13,7 +13,7 @@ func stats():
 	knockback = 300
 	attackOneCooldown = 3
 	knockbackResistance = 90
-	speed = 45
+	speed = 55
 	damage = 25
 
 func attack1():

@@ -196,7 +196,6 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 12 )
 
 [node name="healthbar" parent="." index="15"]
-rect_pivot_offset = Vector2( 8, 2 )
 value = 60.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

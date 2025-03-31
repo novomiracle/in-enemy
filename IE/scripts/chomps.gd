@@ -10,8 +10,8 @@ func stats():
 	attackOneCooldown = 2
 	knockback = 180
 	damage = 20
-	hp = 100
-	speed = 50
+	hp = 95
+	speed = 55
 
 # Called when the node enters the scene tree for the first time.
 func attack1():

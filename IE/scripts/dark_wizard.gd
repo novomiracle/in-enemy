@@ -10,8 +10,8 @@ onready var parent = get_parent()
 func stats():
 	soul = 2
 	attackOneCooldown = 2.5
-	hp = 50
-	speed = 90
+	hp = 40
+	speed = 85
 func attack1():
 	$AnimationPlayer.play("attack")
 	var inst = magic_circle.instance()

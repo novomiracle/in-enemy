@@ -7,7 +7,7 @@ extends "res://scripts/monster.gd"
 var dashDirection = Vector2.ZERO;
 func stats():
 	knockbackResistance = 50
-	attackOneCooldown = 5
+	attackOneCooldown = 3.8
 	attackTwoCooldown= 0.5
 	knockback = 250
 	soul = 2
